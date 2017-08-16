@@ -17,7 +17,7 @@ import wx.xrc
 class form1 ( wx.Frame ):
 
 	def __init__( self, parent ):
-		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 648,376 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+		wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 680,400 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
 
 		self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 
@@ -84,8 +84,33 @@ class form1 ( wx.Frame ):
 
 		fgSizer8.AddSpacer( ( 40, 0), 1, wx.EXPAND, 5 )
 
-		self.ListCtrl = wx.ListCtrl( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 550,200 ), wx.LC_REPORT )
+		self.ListCtrl = wx.ListCtrl( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 500,200 ), wx.LC_EDIT_LABELS|wx.LC_REPORT )
 		fgSizer8.Add( self.ListCtrl, 0, wx.ALL, 5 )
+
+		bSizer1 = wx.BoxSizer( wx.VERTICAL )
+
+		self.btnEditar = wx.Button( self, wx.ID_ANY, u"Editar", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer1.Add( self.btnEditar, 0, wx.ALL, 5 )
+
+		self.btnEliminar = wx.Button( self, wx.ID_ANY, u"Eliminar", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.btnEliminar.SetBackgroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_WINDOWFRAME ) )
+
+		bSizer1.Add( self.btnEliminar, 0, wx.ALL, 5 )
+
+
+		bSizer1.AddSpacer( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.btnNuevo = wx.Button( self, wx.ID_ANY, u"Nuevo", wx.DefaultPosition, wx.DefaultSize, 0 )
+		bSizer1.Add( self.btnNuevo, 0, wx.ALL, 5 )
+
+
+		fgSizer8.Add( bSizer1, 1, wx.EXPAND, 5 )
+
+
+		fgSizer8.AddSpacer( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.btnMostrar = wx.Button( self, wx.ID_ANY, u"Mostrar gráfica", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer8.Add( self.btnMostrar, 0, wx.ALL, 5 )
 
 
 		fgSizer6.Add( fgSizer8, 1, wx.EXPAND, 5 )
@@ -98,6 +123,11 @@ class form1 ( wx.Frame ):
 
 		# Connect Events
 		self.btnAgregar.Bind( wx.EVT_BUTTON, self.Agregar )
+		self.ListCtrl.Bind( wx.EVT_LIST_ITEM_SELECTED, self.Seleccionar )
+		self.btnEditar.Bind( wx.EVT_BUTTON, self.Editar )
+		self.btnEliminar.Bind( wx.EVT_BUTTON, self.Eliminar )
+		self.btnNuevo.Bind( wx.EVT_BUTTON, self.Nuevo )
+		self.btnMostrar.Bind( wx.EVT_BUTTON, self.Mostrar )
 
 	def __del__( self ):
 		pass
@@ -105,4 +135,19 @@ class form1 ( wx.Frame ):
 
 	# Virtual event handlers, overide them in your derived class
 	def Agregar( self, event ):
+		event.Skip()
+
+	def Seleccionar( self, event ):
+		event.Skip()
+
+	def Editar( self, event ):
+		event.Skip()
+
+	def Eliminar( self, event ):
+		event.Skip()
+
+	def Nuevo( self, event ):
+		event.Skip()
+
+	def Mostrar( self, event ):
 		event.Skip()
