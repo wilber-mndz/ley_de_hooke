@@ -152,6 +152,8 @@ class form1 ( wx.Frame ):
 		self.Centre( wx.BOTH )
 
 		# Connect Events
+		self.txtDespl.Bind( wx.EVT_TEXT, self.Validar_Despl )
+		self.txtFuerza.Bind( wx.EVT_TEXT, self.Validar_Fuerza )
 		self.btnAgregar.Bind( wx.EVT_BUTTON, self.Agregar )
 		self.ListCtrl.Bind( wx.EVT_LIST_ITEM_SELECTED, self.Seleccionar )
 		self.btnEliminar.Bind( wx.EVT_BUTTON, self.Eliminar )
@@ -164,6 +166,12 @@ class form1 ( wx.Frame ):
 
 
 	# Virtual event handlers, overide them in your derived class
+	def Validar_Despl( self, event ):
+		event.Skip()
+
+	def Validar_Fuerza( self, event ):
+		event.Skip()
+
 	def Agregar( self, event ):
 		event.Skip()
 

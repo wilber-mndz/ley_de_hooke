@@ -9,9 +9,11 @@ import numpy as np
 import matplotlib.pyplot as plt
 # Importamos el diseño del formulario
 import form_main
+# Importamos archivo de validaciones
+import validaciones
 
 
-class Principal(form_main.form1):
+class Principal(form_main.form1, validaciones.Validaciones):
     """Programa."""
 
     # Creamos el metodo init de la clase principal
@@ -36,18 +38,29 @@ class Principal(form_main.form1):
 
     def Agregar(self, event):
         """Metodo que agregara los datos ingresados por el usuario."""
-        # Agremamos una fila al ListCtrl
-        self.ListCtrl.InsertStringItem(self.fila,
-                                       str(self.txtDespl.GetValue()))
-        # Agregamos los datos a la fila agregada
-        self.ListCtrl.SetStringItem(self.fila,
-                                    1, str(self.txtFuerza.GetValue()))
-        self.fila += 1
+        # Verificamos que los campos no esten vacios
+        if self.txtDespl.GetValue() == "" or self.txtFuerza.GetValue() == "":
+            dialogo = wx.MessageDialog(None, 'Ingrese ambos datos',
+                                       'Agregar',
+                                       wx.OK | wx.ICON_INFORMATION)
+            dialogo.ShowModal()  # Mostramos dialogo
+            dialogo.Destroy()    # Destruimos el dialogo
 
-        # Limpiamos los TextCtrl
-        self.txtDespl.SetValue("")
-        self.txtFuerza.SetValue("")
-        self.txtDespl.SetFocus()
+        else:
+            # Agremamos una fila al ListCtrl
+            self.ListCtrl.InsertStringItem(self.fila,
+                                           str(float(self.txtDespl.GetValue())
+                                               ))
+            # Agregamos los datos a la fila agregada
+            self.ListCtrl.SetStringItem(self.fila,
+                                        1, str(float(self.txtFuerza.GetValue())
+                                               ))
+            self.fila += 1
+
+            # Limpiamos los TextCtrl
+            self.txtDespl.SetValue("")
+            self.txtFuerza.SetValue("")
+            self.txtDespl.SetFocus()
 
     def Seleccionar(self, event):
         """Seleciona un elemento de la lista para su eliminacion o edicion."""
@@ -58,9 +71,26 @@ class Principal(form_main.form1):
     def Eliminar(self, event):
         """Elimina de la lista el elemento seleccionado."""
         # Comprobamos que se haya seleccionado un elemento
-        if self.elementoFila != "":
+        if self.filaSelec != "":
+            # Eliminamos elemento de la fila
             self.ListCtrl.DeleteItem(self.filaSelec)
-        self.fila -= 1
+            self.fila -= 1       # Restamos uno al contador
+            self.filaSelec = ""  # Vaciamos la variable fila
+            # Creamos un dialogo un mensaje indicando que no se a seleccionado
+            dialogo = wx.MessageDialog(None, 'Elemento eliminado',
+                                       'Eliminar',
+                                       wx.OK | wx.ICON_INFORMATION)
+            dialogo.ShowModal()  # Mostramos dialogo
+            dialogo.Destroy()    # Destruimos el dialogo
+        else:
+            # Creamos un dialogo un mensaje indicando que no se a seleccionado
+            dialogo = wx.MessageDialog(None, 'Seleccione un elemento',
+                                       'Eliminar',
+                                       wx.OK | wx.ICON_INFORMATION)
+            dialogo.ShowModal()  # Mostramos dialogo
+            dialogo.Destroy()    # Destruimos el dialogo
+
+        print self.fila
 
     def Nuevo(self, event):
         """Vacia todos los campos para ingresar un nuevo problema."""
@@ -104,6 +134,18 @@ class Principal(form_main.form1):
         for i in range(0, self.ListCtrl.GetItemCount()):
             self.Despla.append(self.ListCtrl.GetItemText(i, 0))
             self.Fuerza.append(self.ListCtrl.GetItemText(i, 1))
+
+    def Validar_Despl(self, event):
+        """Verificar que el usuario solo ingrese numeros."""
+        desplazamiento = self.Validar_Float(str(self.txtDespl.GetValue()))
+        if desplazamiento != str(self.txtDespl.GetValue()):
+            self.txtDespl.SetValue(str(desplazamiento))
+
+    def Validar_Fuerza(self, event):
+        """Verificar que el usuario solo ingrese numeros."""
+        fuerza = self.Validar_Float(str(self.txtFuerza.GetValue()))
+        if fuerza != str(self.txtFuerza.GetValue()):
+            self.txtFuerza.SetValue(str(fuerza))
 
 
 class MyApp(wx.App):
