@@ -119,28 +119,17 @@ class form1 ( wx.Frame ):
 
 		fgSizer4.AddSpacer( ( 40, 0), 1, wx.EXPAND, 5 )
 
-		self.label1 = wx.StaticText( self, wx.ID_ANY, u"Ecuacion lineal", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.label1.Wrap( -1 )
-		fgSizer4.Add( self.label1, 0, wx.ALL, 15 )
-
-		self.txtEcuLineal = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 160,-1 ), 0 )
-		fgSizer4.Add( self.txtEcuLineal, 0, wx.ALL, 5 )
-
-		self.m_staticText5 = wx.StaticText( self, wx.ID_ANY, u"Ecuacion no lineal", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.m_staticText5.Wrap( -1 )
-		fgSizer4.Add( self.m_staticText5, 0, wx.ALL, 15 )
-
-		self.txtEcuNoLin = wx.TextCtrl( self, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.Size( 160,-1 ), 0 )
-		fgSizer4.Add( self.txtEcuNoLin, 0, wx.ALL, 5 )
-
-
-		fgSizer4.AddSpacer( ( 40, 0), 1, wx.EXPAND, 5 )
-
 
 		fgSizer4.AddSpacer( ( 40, 0), 1, wx.EXPAND, 5 )
 
 		self.btnMostrar = wx.Button( self, wx.ID_ANY, u"Mostrar gráfica", wx.DefaultPosition, wx.DefaultSize, 0 )
 		fgSizer4.Add( self.btnMostrar, 0, wx.ALL, 5 )
+
+
+		fgSizer4.AddSpacer( ( 60, 0), 1, wx.EXPAND, 5 )
+
+		self.btnEcuacion = wx.Button( self, wx.ID_ANY, u"Ecuacion", wx.DefaultPosition, wx.DefaultSize, 0 )
+		fgSizer4.Add( self.btnEcuacion, 0, wx.ALL, 5 )
 
 
 		fgSizer6.Add( fgSizer4, 1, wx.EXPAND, 5 )
@@ -160,6 +149,7 @@ class form1 ( wx.Frame ):
 		self.btnNuevo.Bind( wx.EVT_BUTTON, self.Nuevo )
 		self.btnCalcular.Bind( wx.EVT_BUTTON, self.Calcular )
 		self.btnMostrar.Bind( wx.EVT_BUTTON, self.Mostrar )
+		self.btnEcuacion.Bind( wx.EVT_BUTTON, self.Ecuacion )
 
 	def __del__( self ):
 		pass
@@ -188,4 +178,7 @@ class form1 ( wx.Frame ):
 		event.Skip()
 
 	def Mostrar( self, event ):
+		event.Skip()
+
+	def Ecuacion( self, event ):
 		event.Skip()

@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import form_main
 # Importamos archivo de validaciones
 import validaciones
+import ecuacion
 
 
 class Principal(form_main.form1, validaciones.Validaciones):
@@ -146,6 +147,11 @@ class Principal(form_main.form1, validaciones.Validaciones):
         fuerza = self.Validar_Float(str(self.txtFuerza.GetValue()))
         if fuerza != str(self.txtFuerza.GetValue()):
             self.txtFuerza.SetValue(str(fuerza))
+
+    def Ecuacion(self, event):
+        """Lanzamos el formulario para evualuar punto"""
+        self.form_ecuacion = ecuacion.Ecuacion(self)
+        self.form_ecuacion.Show()
 
 
 class MyApp(wx.App):
